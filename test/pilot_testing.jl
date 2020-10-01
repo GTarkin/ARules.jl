@@ -1,19 +1,19 @@
 # pilot_testing.jl
 
 
-# @code_warntype Node(Int16(1), Int16[1], trues(3))
-n1 = Node(Int16(1), Int16[1], trues(3))
+# @code_warntype Node(Int32(1), Int32[1], trues(3))
+n1 = Node(Int32(1), Int32[1], trues(3))
 
-# @code_warntype Node(Int16(1), Int16[1, 2], trues(3), n1)
-n2 = Node(Int16(1), Int16[1, 2], trues(3), n1, 1)
-n3 = Node(Int16(1), Int16[1, 3], trues(3), n1, 1)
-n4 = Node(Int16(1), Int16[1, 4], trues(3), n1, 1)
-n5 = Node(Int16(1), Int16[1, 5], trues(3), n1, 1)
-n6 = Node(Int16(1), Int16[1, 6], trues(3), n1, 1)
-n7 = Node(Int16(1), Int16[2, 3], trues(3), n1, 1)
-n8 = Node(Int16(1), Int16[2, 4], trues(3), n1, 1)
-n9 = Node(Int16(1), Int16[2, 5], trues(3), n1, 1)
-n10 = Node(Int16(1), Int16[2, 6], trues(3), n1, 1)
+# @code_warntype Node(Int32(1), Int32[1, 2], trues(3), n1)
+n2 = Node(Int32(1), Int32[1, 2], trues(3), n1, 1)
+n3 = Node(Int32(1), Int32[1, 3], trues(3), n1, 1)
+n4 = Node(Int32(1), Int32[1, 4], trues(3), n1, 1)
+n5 = Node(Int32(1), Int32[1, 5], trues(3), n1, 1)
+n6 = Node(Int32(1), Int32[1, 6], trues(3), n1, 1)
+n7 = Node(Int32(1), Int32[2, 3], trues(3), n1, 1)
+n8 = Node(Int32(1), Int32[2, 4], trues(3), n1, 1)
+n9 = Node(Int32(1), Int32[2, 5], trues(3), n1, 1)
+n10 = Node(Int32(1), Int32[2, 6], trues(3), n1, 1)
 
 
 push!(n1.children, n2)
@@ -172,7 +172,7 @@ apriori(a_list, 0.01, 6)
 
 
 
-# Example below used to track down bug of unexplored node Int16[4, 10, 14]
+# Example below used to track down bug of unexplored node Int32[4, 10, 14]
 transactions = [["milk", "eggs", "bread"],
                 ["butter", "milk", "sugar", "flour", "eggs"],
                 ["bacon", "eggs", "milk", "beer"],

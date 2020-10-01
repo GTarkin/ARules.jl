@@ -2,8 +2,8 @@
 
 
 struct Rule
-    p::Array{Int16,1}
-    q::Int16
+    p::Array{Int32,1}
+    q::Int32
     supp::Float64
     conf::Float64
     lift::Float64
@@ -15,7 +15,7 @@ function update_support_cnt!(supp_dict::Dict, nd::Node)
 end
 
 
-function grow_support_dict!(supp_cnt::Dict{Array{Int16,1}, Int}, node::Node)
+function grow_support_dict!(supp_cnt::Dict{Array{Int32,1}, Int}, node::Node)
     if has_children(node)
         for nd in node.children
             update_support_cnt!(supp_cnt, nd)
@@ -29,8 +29,8 @@ end
 # are the support count for the given itemset. This function is used
 # for computing support, confidence, and lift of association rules.
 function gen_support_dict(root::Node, num_transacts)
-    supp_cnt = Dict{Array{Int16, 1}, Int}()
-    supp_cnt[Int16[]] = num_transacts
+    supp_cnt = Dict{Array{Int32, 1}, Int}()
+    supp_cnt[Int32[]] = num_transacts
     grow_support_dict!(supp_cnt, root)
     return supp_cnt
 end
@@ -38,7 +38,7 @@ end
 
 # Given a single node in a frequent item tree, this function generates all the
 # rules for that node. This does not include rules for the node's children.
-function gen_node_rules(node::Node, supp_dict::Dict{Array{Int16,1}, Int}, k, num_transacts, minconf)
+function gen_node_rules(node::Node, supp_dict::Dict{Array{Int32,1}, Int}, k, num_transacts, minconf)
     lhs_keep = trues(k)
     rules = Array{Rule, 1}(undef, 0)
     for i = 1:k
@@ -68,7 +68,7 @@ function gen_node_rules(node::Node, supp_dict::Dict{Array{Int16,1}, Int}, k, num
 end
 
 
-function gen_rules!(rules::Array{Rule, 1}, node::Node, supp_dict::Dict{Array{Int16, 1}, Int}, k, num_transacts, minconf)
+function gen_rules!(rules::Array{Rule, 1}, node::Node, supp_dict::Dict{Array{Int32, 1}, Int}, k, num_transacts, minconf)
     m = length(node.children)
 
     for child in node.children
@@ -81,7 +81,7 @@ function gen_rules!(rules::Array{Rule, 1}, node::Node, supp_dict::Dict{Array{Int
 end
 
 
-function gen_rules(root::Node, supp_dict::Dict{Array{Int16, 1}, Int}, num_transacts, minconf)
+function gen_rules(root::Node, supp_dict::Dict{Array{Int32, 1}, Int}, num_transacts, minconf)
     rules = Array{Rule, 1}(undef, 0)
     n_kids = length(root.children)
     if n_kids > 0
@@ -126,7 +126,7 @@ the maximum length of an association rule (i.e., total items on left- and right-
 function apriori(transactions::Array{Array{S, 1}, 1}; supp::Float64 = 0.01, conf = 0.8, maxlen::Int = 5) where S
     n = length(transactions)
     uniq_items = unique_items(transactions)
-    item_lkup = Dict{Int16, S}()
+    item_lkup = Dict{Int32, S}()
     for (i, itm) in enumerate(uniq_items)
         item_lkup[i] = itm
     end

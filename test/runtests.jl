@@ -37,7 +37,7 @@ unq2 = unique_items(t2)
 xtree2 = frequent_item_tree(t2, unq2, 1, 4);
 xsup = gen_support_dict(xtree2, length(t2))
 @test length(xsup) == 27
-@test typeof(xsup) == Dict{Array{Int16,1}, Int64}
+@test typeof(xsup) == Dict{Array{Int32,1}, Int64}
 
 xrules = gen_node_rules(xtree2.children[1].children[1].children[1], xsup, 3, 8, 0.1)
 @test length(xrules) == 3
